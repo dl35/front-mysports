@@ -1,0 +1,20 @@
+
+version: "3"
+
+services:
+
+  angular:
+    build:
+      context: .
+    container_name: "${CONTAINER_NAME}:${TAG}"
+    image: "${IMAGE_NAME}:${TAG}"
+    stdin_open: true
+    tty: true
+    user: "${UID}:${GID}"
+    environment:
+        - CONTAINER_NAME=${CONTAINER_NAME}:${TAG}
+        
+    volumes: 
+      - ../app:/app
+    ports:
+      - 4200:4200

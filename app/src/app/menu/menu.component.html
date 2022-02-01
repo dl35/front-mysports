@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+       <button (click)="change(1)" mat-raised-button [color]="this.selected == 1 ? 'accent' : 'primary'"  matTooltip="Production" routerLink="/prod" >
+      <mat-icon>build</mat-icon>Production</button>
+            <button (click)="change(2)" mat-raised-button [color]="this.selected == 2 ? 'accent' : 'primary'"  matTooltip="Diffusion" routerLink="/diff" >
+      <mat-icon>speaker_phone</mat-icon>Diffusion</button>
+      <button (click)="change(3)"  mat-raised-button [color]="this.selected == 3 ? 'accent' : 'primary'"  matTooltip="Abonnements" routerLink="/abo" >
+        <mat-icon>storage</mat-icon>Abonnements</button>
+
+        <span class="fill-space"></span>
+
+        <button mat-icon-button aria-label="Profile" matTooltip="{{profile}}" *ngIf="profile =='admin'" color="warn" routerLink="/login"  >
+          <mat-icon>supervisor_account</mat-icon>
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Profile" matTooltip="{{profile}}" *ngIf="profile =='esco'" color="accent" routerLink="/login"  >
+          <mat-icon>account_circle</mat-icon>
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Profile" matTooltip="{{profile}}" *ngIf="profile =='msp'" color="accent" routerLink="/login"  >
+          <mat-icon>account_box</mat-icon>
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+    <router-outlet></router-outlet>

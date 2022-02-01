@@ -1,0 +1,17 @@
+{
+  "/api/": {
+   
+    "target": "http://alias-back/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/datas": "/datas"
+    }
+  }  
+
+ 
+  
+
+
+  }
