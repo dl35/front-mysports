@@ -1,16 +1,25 @@
 {
-  "/api/": {
+  "/auth": {
    
-    "target": "http://alias-back/",
+    "target": "http://192.168.1.7:3000/",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
     "pathRewrite": {
-      "^/datas": "/datas"
+      "^/auth": "/auth"
     }
-  }  
+  },
 
- 
+  "/activite": {
+   
+    "target": "http://192.168.1.7:3000/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/activite": "/activites"
+    }
+  }
   
 
 
