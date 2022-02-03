@@ -12,19 +12,20 @@ export class MenuComponent implements OnInit {
 
 
   selected = 0;
-  profile = '';
+  profile = "ADMIN" ;
 
   constructor(private router: Router) {
 
+    /*
     if ( router.url === '/' )  {
 
         this.router.navigate(['/logo'], {  skipLocationChange: true});
-    }
+    }*/
     const token = sessionStorage.getItem('token') ;
     if ( token ) {
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(token);
-      this.profile = decodedToken.profile ;
+      this.profile = decodedToken.role ;
     }
 
 

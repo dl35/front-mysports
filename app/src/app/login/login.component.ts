@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
   initForm() {
     this.dataForm = this.formBuilder.group({
       // tslint:disable-next-line:max-line-length
-      user: [ 'test@meteo.fr'  , [Validators.required , Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$') ] ]  ,
-      pwd: [ 'test', [Validators.required,  Validators.minLength(4)] ]
+      email: [ 'valentin.andersen@gmail.com'  , [Validators.required , Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$') ] ]  ,
+      passwd: [ '13ma', [Validators.required,  Validators.minLength(4)] ]
                                         });
   }
 
@@ -40,9 +40,9 @@ this.loginService.signout();
 
 doSignUp() {
 
-this.loginService.signup( this.dataForm.value  ).subscribe(
+this.loginService.signin( this.dataForm.value  ).subscribe(
 // tslint:disable-next-line:max-line-length
-(data)  =>   {  sessionStorage.setItem('token' , data.token )  ;     this.router.navigate(['/']) ;  } ,
+(data)  =>   { console.log( data ) ; sessionStorage.setItem('token' , data.access_token )  ;     this.router.navigate(['/']) ;  } ,
 (error) => {
   } ,
 () => {}

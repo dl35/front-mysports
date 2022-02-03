@@ -10,8 +10,9 @@ import { UsersComponent } from './users/users.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { MenuComponent } from './menu/menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MyHttpInterceptor } from './services/my-http.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

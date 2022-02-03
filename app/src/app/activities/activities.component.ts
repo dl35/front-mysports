@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { ActivitiesService } from './../services/activities.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActivitiesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private actserv: ActivitiesService) { }
+
+  datas$: Observable<any> | undefined ;
 
   ngOnInit(): void {
+
+   this.datas$ =  this.actserv.get();
+
   }
 
 }

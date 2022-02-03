@@ -6,12 +6,13 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
 
-  url = '/api/signup' ;
+  url = '/auth/signin' ;
 
   constructor(private http: HttpClient) {
   }
 
-  signup( value: any ) {
+  signin( value: any ) {
+    console.log( value );
     return this.http.post<any>( this.url  , value) ;
   }
 
