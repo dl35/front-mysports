@@ -1,3 +1,5 @@
+import { EditComponent } from './activities/edit/edit.component';
+import { mySocket } from './services/mySocket';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './material/material.module';
@@ -13,6 +15,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyHttpInterceptor } from './services/my-http.interceptor';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ProfileComponent } from './profile/profile.component';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { ChartComponent } from './chart/chart.component';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -20,7 +30,11 @@ import { MyHttpInterceptor } from './services/my-http.interceptor';
     LoginComponent,
     UsersComponent,
     ActivitiesComponent,
-    MenuComponent
+    EditComponent,
+    MenuComponent,
+    ProfileComponent,
+    ChartComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -29,9 +43,12 @@ import { MyHttpInterceptor } from './services/my-http.interceptor';
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SocketIoModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }],
+  providers: [mySocket , { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
+       
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

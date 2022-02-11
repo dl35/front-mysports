@@ -1,0 +1,36 @@
+table {
+    width: 100%;
+  }
+.mat-row {
+    _height:35px;
+    height: 30px !important;
+    _font-size:11px;
+}
+.mat-header-cell {
+  height:30px;
+  font-size:11px;
+  font-weight:500;
+}
+.mat-cell {
+  height:30px;
+  font-size:11px;
+}
+
+.mat-chip {
+  font-size: 12px;
+  min-height: 20px;
+  
+}
+
+.loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

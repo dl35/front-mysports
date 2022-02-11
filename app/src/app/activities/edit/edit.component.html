@@ -1,0 +1,84 @@
+<mat-toolbar  color="primary"  >
+    <span *ngIf="!user" >Mes Activités</span>
+    <span *ngIf="user">Activités : {{ user.prenom}} {{ user.nom }}</span>
+</mat-toolbar>
+
+<form  style="margin: 0 auto;text-align: center;" *ngIf="dataForm"   autocomplete="off" [formGroup]="dataForm" (ngSubmit)="doSave()"  novalidate>  
+
+     <br> 
+    <div style="margin-top:15px" >
+        <div style="width:100%" > 
+          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-form-field  style="width:40%"  >
+            <mat-select placeholder="Type"  formControlName="type" >
+              <mat-option value="BIKE" sele>Cyclisme</mat-option>
+              <mat-option value="SWIM">Natation</mat-option>
+              <mat-option value="RUN">Course à pied</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+    </div>
+
+    <div style="margin-top:15px" >
+        <div style="width:100%" > 
+          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-form-field appearance="fill" style="width:40%" >
+            <mat-label>La date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+         
+        </div>
+    </div>
+
+    <div style="margin-top:15px" >
+        <div style="width:100%" > 
+          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-form-field  style="width:40%"  >
+            <input matInput placeholder="Distance" type="number" formControlName="dist"   >
+            <mat-error>une distance est requise</mat-error>
+            <mat-hint>Veuillez saisir une distance</mat-hint>
+          </mat-form-field>
+        </div>
+    </div>
+ 
+ 
+
+    <div style="margin-top:15px" >
+        <div style="width:100%" > 
+          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-form-field  style="width:40%"  >
+            <input matInput placeholder="Description"  formControlName="desc"  >
+            <mat-hint>Description optionnelle</mat-hint>
+          </mat-form-field>
+        </div>
+    </div>
+
+ 
+
+
+  
+
+
+            <div  style="margin-top:15px;" >
+            <div>
+            <button mat-raised-button color="primary"  type="submit"  [disabled]="dataForm.invalid"    >
+            <mat-icon>play_arrow</mat-icon>
+            Sauvegarde
+            </button>
+            &nbsp;&nbsp;
+            
+            
+            <button mat-raised-button color="primary"   (click)="quitte()"   >
+            <mat-icon>play_arrow</mat-icon>
+            Quitte
+            </button>   
+            
+            </div>
+         
+            </div>
+  <br>
+  </form>
+

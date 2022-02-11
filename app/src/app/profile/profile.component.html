@@ -1,0 +1,109 @@
+
+
+
+<form  style="margin: 0 auto;text-align: center;" *ngIf="dataForm"   autocomplete="off" [formGroup]="dataForm" (ngSubmit)="doSave()"  novalidate>  
+
+    <div style="margin-top:35px" >
+        <div style="width:100%" > 
+          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-form-field  style="width:40%"  >
+            <input matInput placeholder="Nom"  formControlName="nom"  >
+            <mat-error>un nom est requise</mat-error>
+            <mat-hint>Veuillez saisir votre nom</mat-hint>
+          </mat-form-field>
+        </div>
+    </div>
+
+    <div style="margin-top:15px" >
+        <div style="width:100%" > 
+          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-form-field  style="width:40%"  >
+            <input matInput placeholder="Prenom"  formControlName="prenom"  >
+            <mat-error>une prenom est requis</mat-error>
+            <mat-hint>Veuillez saisir votre prenom</mat-hint>
+          </mat-form-field>
+        </div>
+    </div>
+
+    <div style="margin-top:15px" >
+        <div style="width:100%" > 
+          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-form-field  style="width:40%"  >
+            <input matInput placeholder="Email"  formControlName="email"   >
+            <mat-error>une adresse email valide est requise</mat-error>
+            <mat-hint>Veuillez saisir votre adresse email</mat-hint>
+          </mat-form-field>
+        </div>
+    </div>
+ 
+    <div style="margin-top:15px"  >
+            <div style="width:100%" > 
+              <mat-icon color="primary" >lock</mat-icon>
+              <mat-form-field style="width:40%" >
+                <input matInput placeholder="Mot de passe" type="password"    formControlName="passwd"  >
+                <mat-error>un mot de passe requis 4 chars mini </mat-error>
+                <mat-hint>Veuillez saisir votre mot de passe</mat-hint>
+              </mat-form-field>
+            </div>
+    </div>
+
+    <div style="margin-top:15px" >
+        <div style="width:100%" > 
+          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-form-field  style="width:40%"  >
+            <input matInput placeholder="Adresse"  formControlName="adresse"  >
+            <mat-error>une adresse est requise</mat-error>
+            <mat-hint>Veuillez saisir votre adresse</mat-hint>
+          </mat-form-field>
+        </div>
+    </div>
+
+    <div style="margin-top:15px" >
+        <div style="width:100%" > 
+          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-form-field  style="width:40%"  >
+            <input matInput placeholder="Code postal"  formControlName="cp" maxlength="5" size="5" >
+            <mat-error>un cp est requis</mat-error>
+            <mat-hint>Veuillez saisir le code postal</mat-hint>
+          </mat-form-field>
+        </div>
+    </div>
+
+
+    <div style="margin-top:15px" >
+        <div style="width:100%" > 
+          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-form-field  style="width:40%"  >
+            <input matInput placeholder="Ville"  formControlName="ville" >
+            <mat-error>une ville est requise</mat-error>
+            <mat-hint>Veuillez saisir la ville</mat-hint>
+          </mat-form-field>
+        </div>
+    </div>    
+
+
+
+
+            <div  style="margin-top:15px" >
+            <div>
+            <button mat-raised-button color="primary"  type="submit"  [disabled]="dataForm.invalid"    >
+            <mat-icon>play_arrow</mat-icon>
+            Sauvegarde
+            </button>
+            &nbsp;&nbsp;
+            
+            <button mat-raised-button color="primary" *ngIf="!itemUser" routerLink="/activite"     >
+            <mat-icon>play_arrow</mat-icon>
+            Quitte
+            </button>
+            
+            <button mat-raised-button color="primary" *ngIf="itemUser"  (click)="quitte(undefined)"   >
+            <mat-icon>play_arrow</mat-icon>
+            Quitte
+            </button>   
+            
+            </div>
+         
+            </div>
+  
+  </form>

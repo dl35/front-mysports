@@ -1,7 +1,11 @@
+import { MessageService } from './../services/message.service';
 import { LoginService } from './../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+
+
+
 
 @Component({
   selector: 'app-menu',
@@ -10,11 +14,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class MenuComponent implements OnInit {
 
-
+  
   selected = 0;
   profile = "ADMIN" ;
 
-  constructor(private router: Router) {
+
+  constructor(private router: Router, private messerv : MessageService) {
 
     /*
     if ( router.url === '/' )  {
@@ -29,14 +34,28 @@ export class MenuComponent implements OnInit {
     }
 
 
+
   }
 
  ngOnInit(): void {
+
+    /*
+    this.messerv.sendMessage("ok....");
+    this.messerv.getMessages().subscribe( v  =>  console.log( v) ) 
+    */
+
  }
- 
+  
+
+  
+  
+
+
  change(n: number) {
     this.selected = n;
 }
 
 
 }
+
+
