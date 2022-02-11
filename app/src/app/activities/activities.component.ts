@@ -1,4 +1,4 @@
-import { BehaviorSubject, debounceTime, distinctUntilChanged, map, merge, Observable, startWith, switchMap } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, map, merge, Observable, of, startWith, switchMap } from 'rxjs';
 import { ActivitiesService } from './../services/activities.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
@@ -72,10 +72,14 @@ export class ActivitiesComponent implements OnInit {
     this.searchControl = new FormControl('');
     this.search$ = this.searchControl.valueChanges
       .pipe(
-       startWith(''), 
+     //  startWith(''), 
        debounceTime( 100 ),
        distinctUntilChanged(),
        switchMap( (item: string)  =>  {
+         item = item.trim();
+         if( item == "" ) {
+           return of([]);
+         }
         //const p  = { search: item , page: 1}
         return this.userService.complete( item );
   }
