@@ -1,4 +1,5 @@
-import { BehaviorSubject, debounceTime, distinctUntilChanged, map, merge, Observable, of, startWith, switchMap } from 'rxjs';
+import { DialogConfirmComponent } from './../dialog-confirm/dialog-confirm.component';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, map, merge, Observable, of, startWith, switchMap, tap } from 'rxjs';
 import { ActivitiesService } from './../services/activities.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
@@ -11,6 +12,7 @@ import { UsersService } from '../services/users.service';
 import { User } from '../interfaces/user';
 import { LoginService } from '../services/login.service';
 import { UserComplete } from '../interfaces/user-complete';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -55,10 +57,10 @@ export class ActivitiesComponent implements OnInit {
   search$!: Observable<UserComplete[]> ;
 
   showEdit = false;
-  itemCurrent!: Activite | undefined ;
+  activiteSelected!: Activite | undefined ;
   //readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  constructor(private actserv: ActivitiesService,  private userService: UsersService , private loginServ: LoginService) { 
+  constructor(public dialog: MatDialog, private actserv: ActivitiesService,  private userService: UsersService , private loginServ: LoginService) { 
 
         this.isAdmin = this.loginServ.isAdmin();
         //  this.isAdmin = false;
@@ -90,22 +92,9 @@ export class ActivitiesComponent implements OnInit {
 
     this.dataSource = new ActiviteDataSource();
     this.loadData(false);
-  /*  setInterval(() => { 
-      this.loadData(false , false );
-  }, 2000);*/
+
   }
-/*
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value: string  = event.value;
-    if ((value || '').trim()) {
-      this.filter.search.push(value.trim());
-    }
-    if (input) {
-      input.value = '';
-    }
-    this.loadData(true, false);
-  }*/
+
 /*
   remove(item: Activite ): void {
     const index = this.filter.search.indexOf(item);
@@ -119,6 +108,7 @@ export class ActivitiesComponent implements OnInit {
   autocomplete() {
 
       this.isSearch = ! this.isSearch ;
+       this.searchControl.setValue('');
 
   }
 
@@ -147,15 +137,124 @@ export class ActivitiesComponent implements OnInit {
   }
 
 
-  toAdd(){
-        this.itemCurrent = undefined ;
+  toQuitte(item: Activite | false ){
+
+      if( item == false ) {
+         this.activiteSelected = undefined ;
+         this.showEdit = false ;
+         return;
+      }
+    
+    const act = item as Activite ;  
+  
+    // mode update
+    if( this.activiteSelected  )  {
+  
+      this.actserv.update( act ).subscribe( 
+        () => { this.updateItem( act );
+          this.activiteSelected = undefined ;
+          this.showEdit = false ;
+        }
+      )
+
+
+    }  else { 
+      // mode ajout
+     
+      if ( this.userSelected ) {
+
+        const id = this.userSelected.id  as number ;
+        act.userId = id;
+        this.actserv.addtoid( id , act ).subscribe(
+          () =>  { this.loadData( true ) 
+                   this.activiteSelected = undefined ;
+                   this.showEdit = false ;
+                 }
+        );
+      } else {
+
+        this.actserv.add(  act ).subscribe( 
+            () => { this.loadData( true );
+                    this.activiteSelected = undefined ;
+                    this.showEdit = false ;
+                  }
+
+        );
+      }
+
+     
+
+    }
+
+  
+
+
+  }
+
+
+
+
+
+
+  openAdd(){
+        this.activiteSelected = undefined ;
         this.showEdit = true ;
   }
 
-  toEdition( item: Activite ){
-    this.itemCurrent = item ;
+  openUpdate( item: Activite ){
+    
+    this.activiteSelected = item ;
     this.showEdit = true ;
+
+/*
+    this.actserv.update( item ).subscribe( 
+      () => { this.upadteItem( item );
+        this.activiteSelected = undefined ;
+        this.showEdit = false ;
+      }
+    )  
+*/
+
+   
   }
+
+  openDelete( item: Activite ){
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: '50%',
+      data: { id: item.id , info: 'Voulez vous supprimer cette activité ?'  },
+      disableClose: true
+     });
+  
+     dialogRef.beforeClosed().pipe(
+        switchMap(  (m: boolean) => 
+                {
+                  return ( m) ? this.actserv.delete( item.id ) :  of( false )
+                } )
+  
+        ).subscribe(( res ) => {
+                 if ( res != false  ) 
+                    this.removeItem( item.id) ;
+                });
+    
+    }
+
+
+  private removeItem( id: number  ) {
+    const d = [...this.dataSource.datas]  ;
+    this.dataSource.datas =  d.filter( item => item.id !== id);
+  }
+
+  private updateItem( act: Activite  ) {
+    const d = [...this.dataSource.datas]  ;
+    const index  =  d.findIndex( item => item.id == act.id );
+    d[index] = act;
+    this.dataSource.datas = d;
+
+
+
+  }
+
+
 
   /*
   initData() {

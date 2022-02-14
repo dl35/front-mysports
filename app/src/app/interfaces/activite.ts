@@ -5,6 +5,7 @@ export interface Activite {
       type: TypeActivite      
       dist:number;
       desc?:string;
+      userId?: number;
 }
 
 

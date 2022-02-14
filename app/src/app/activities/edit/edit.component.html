@@ -24,9 +24,9 @@
           <mat-icon color="primary" >perm_identity</mat-icon>
           <mat-form-field appearance="fill" style="width:40%" >
             <mat-label>La date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="date" >
+            <input matInput [max]="maxDate"   [matDatepicker]="picker" formControlName="date" >
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker   #picker></mat-datepicker>
           </mat-form-field>
 
          
@@ -37,8 +37,9 @@
         <div style="width:100%" > 
           <mat-icon color="primary" >perm_identity</mat-icon>
           <mat-form-field  style="width:40%"  >
-            <input matInput placeholder="Distance" type="number" formControlName="dist"   >
-            <mat-error>une distance est requise</mat-error>
+            <input matInput placeholder="Distance en {{ distSuffix }}" type="number" formControlName="dist"   >
+            <span matSuffix >{{distSuffix}}</span>
+            <mat-error>{{dist_error}}</mat-error>
             <mat-hint>Veuillez saisir une distance</mat-hint>
           </mat-form-field>
         </div>
@@ -66,14 +67,14 @@
             <div>
             <button mat-raised-button color="primary"  type="submit"  [disabled]="dataForm.invalid"    >
             <mat-icon>play_arrow</mat-icon>
-            Sauvegarde
+            Enregistrer
             </button>
             &nbsp;&nbsp;
             
             
             <button mat-raised-button color="primary"   (click)="quitte()"   >
             <mat-icon>play_arrow</mat-icon>
-            Quitte
+            Quitter
             </button>   
             
             </div>

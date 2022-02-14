@@ -1,5 +1,5 @@
 <div  *ngIf="showEdit" class="mat-elevation-z12"   style="width:94%;margin-left:3%;margin-right:3%;margin-top:28px;"  >
-<app-edit [item]="itemCurrent"   [user]="userSelected"   (quitteEvent)="showEdit = false "  ></app-edit>
+<app-edit [item]="activiteSelected"   [user]="userSelected"   (quitteEvent)="toQuitte($event)"  ></app-edit>
 </div>
 
 <div [hidden]="showEdit"  class="mat-elevation-z12"  style="width:94%;margin-left:3%;margin-right:3%;margin-top:8px;"  >
@@ -17,7 +17,7 @@
     &nbsp;&nbsp;
     <input matInput type="text"  [matAutocomplete]="auto"   [formControl]="searchControl"   placeholder="rechercher..." class="search-input">
 
-    <mat-autocomplete  autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="refreshUser($event.option.value)" [displayWith]="displayProperty"  >
+    <mat-autocomplete     autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="refreshUser($event.option.value)" [displayWith]="displayProperty"  >
         <mat-option *ngFor="let item of (search$ | async) " [value]="item"   >
           <mat-icon>refresh</mat-icon>
           <span>{{item.prenom}} {{item.nom}}</span>
@@ -27,7 +27,7 @@
 </mat-form-field>
 &nbsp;&nbsp;
 <button mat-mini-fab color="primary" (click)="isSearch=false" aria-label="Example icon button with a filter list icon">
-<mat-icon>back</mat-icon>
+<mat-icon>replay</mat-icon>
 </button>
 </div>
 
@@ -43,7 +43,7 @@
 &nbsp;&nbsp;
 {{ textUser }}</button>
 &nbsp;&nbsp;
-<button mat-mini-fab color="primary"  (click)="toAdd()" aria-label="Example icon button with a filter list icon">
+<button mat-mini-fab color="primary"  (click)="openAdd()" aria-label="Example icon button with a filter list icon">
 <mat-icon>add</mat-icon>
 </button>
 &nbsp;&nbsp;
@@ -57,7 +57,7 @@
      
         <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef>Date</th>
-            <td mat-cell *matCellDef="let item"> {{item.date | date:'dd-MM-yy HH:mm'}} </td>
+            <td mat-cell *matCellDef="let item"> {{item.date | date:'mediumDate'}} </td>
         </ng-container>
         <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef>Type</th>
@@ -65,7 +65,7 @@
         </ng-container>
         <ng-container matColumnDef="dist">
             <th mat-header-cell *matHeaderCellDef>Distance</th> 
-            <td mat-cell *matCellDef="let item"> {{item.dist}} </td>
+            <td mat-cell *matCellDef="let item"> {{item.dist  | kmsPipe: item.type  }} </td>
         </ng-container>
         <ng-container matColumnDef="desc">
             <th mat-header-cell *matHeaderCellDef>Description</th>
@@ -73,7 +73,7 @@
         </ng-container>
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>Edition</th>
-            <td mat-cell *matCellDef="let item" (click)="toEdition(item)">
+            <td style="cursor: pointer;"  mat-cell *matCellDef="let item" (click)="openUpdate(item)">
             <mat-icon color="primary" >edit</mat-icon>    
            </td>
         </ng-container>
@@ -81,7 +81,7 @@
         <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef>testeur</th>
             <td mat-cell *matCellDef="let item">
-            <mat-icon color="warn"  >delete</mat-icon>    
+            <mat-icon style="cursor: pointer;" color="warn" (click)="openDelete(item)"  >delete</mat-icon>    
            </td>
         </ng-container>
                 

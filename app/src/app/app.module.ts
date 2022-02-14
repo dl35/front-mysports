@@ -1,6 +1,6 @@
 import { EditComponent } from './activities/edit/edit.component';
 import { mySocket } from './services/mySocket';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './material/material.module';
 
@@ -19,9 +19,32 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { ChartComponent } from './chart/chart.component';
+import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
+import { KmsPipe } from './pipes/kmsPipe';
+import localeFr from '@angular/common/locales/fr';
+import {
+  MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+
+import 'moment/locale/fr';
+// import { registerLocaleData } from '@angular/common';
+// registerLocaleData(localeFr);
 
 
-
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'LL',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 
 @NgModule({
@@ -33,7 +56,9 @@ import { ChartComponent } from './chart/chart.component';
     EditComponent,
     MenuComponent,
     ProfileComponent,
-    ChartComponent
+    ChartComponent,
+    DialogConfirmComponent,
+    KmsPipe
     
   ],
   imports: [
@@ -46,7 +71,16 @@ import { ChartComponent } from './chart/chart.component';
     BrowserAnimationsModule,
     SocketIoModule
   ],
-  providers: [mySocket , { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
+  providers: [mySocket , 
+    { provide: MAT_DATE_LOCALE, useValue: "fr-FR" },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+
+    { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true }
        
   ],
   bootstrap: [AppComponent]
