@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import { MyGuard } from './guard/my.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { ChartComponent } from './chart/chart.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +18,7 @@ export const routes: Routes = [
     { path: 'user', component:UsersComponent },
     { path: 'activite', component: ActivitiesComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'graphique', component: ChartComponent },
     { path: '', component: ActivitiesComponent },
   
     ]

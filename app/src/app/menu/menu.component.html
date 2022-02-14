@@ -9,7 +9,9 @@
       &nbsp;&nbsp;
       <button (click)="change(2)" *ngIf="profile =='ADMIN'" mat-raised-button [color]="this.selected == 2 ? 'accent' : 'primary'"  matTooltip="Utilistaeurs" routerLink="/user" >
       <mat-icon>speaker_phone</mat-icon>Users</button>
-     
+      &nbsp;&nbsp;
+      <button (click)="change(3)" mat-raised-button [color]="this.selected == 3 ? 'accent' : 'primary'"  matTooltip="Graphique" routerLink="/graphique" >
+      <mat-icon>pie_chart</mat-icon>Graphique</button>
 
         <span class="fill-space"></span>
 
