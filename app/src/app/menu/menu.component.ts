@@ -15,11 +15,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class MenuComponent implements OnInit {
 
   
-  selected = 0;
+ 
   profile = "ADMIN" ;
 
 
   constructor(private router: Router, private messerv : MessageService) {
+
+        console.log(  this.router.url  );
 
     /*
     if ( router.url === '/' )  {
@@ -50,10 +52,6 @@ export class MenuComponent implements OnInit {
   
   
 
-
- change(n: number) {
-    this.selected = n;
-}
 
 
 }

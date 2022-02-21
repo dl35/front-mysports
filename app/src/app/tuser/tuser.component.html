@@ -1,0 +1,52 @@
+<app-profile *ngIf="userSelected"   [itemUser]="userSelected"  (sendUser)="quitteEdit($event)" ></app-profile>
+
+
+<div style="margin:0 auto;width:70%"  [hidden]="userSelected"  >
+
+<mat-form-field style="margin-top:25px;font-size: 12px;margin-left:2%;width:60%;"  >
+<mat-icon matPrefix>search</mat-icon>
+<input matInput type="text"   [formControl]="searchControl"   placeholder="rechercher..." class="search-input">
+</mat-form-field>
+&nbsp;&nbsp;
+<button  (click)="searchControl.setValue('')"   [disabled]="!searchControl.value"  color="primary" mat-mini-fab  aria-label="refresh" >
+<mat-icon>refresh</mat-icon>
+</button>&nbsp;&nbsp;
+
+
+<div *ngIf="pagedata" >
+
+  <div>
+      <div style="display: flex;align-items: center;justify-content: center; margin-top: 15px;"  >
+    <button [disabled]="page == 1"  (click)="topage(0)"   mat-mini-fab  disabled aria-label="Example icon button with a home icon">
+      <mat-icon>first_page</mat-icon>
+    </button>&nbsp;
+    <button [disabled]="!pagedata.previous" (click)="topage(-1)" mat-mini-fab disabled aria-label="Example icon button with a home icon">
+        <mat-icon>navigate_before</mat-icon>
+      </button>&nbsp;
+    <button [disabled]="!pagedata.next" (click)="topage(+1)"  mat-mini-fab disabled aria-label="Example icon button with a home icon">
+    <mat-icon>navigate_next</mat-icon>
+    </button>&nbsp;
+    <button [disabled]="pagedata.lastPage == page "  (click)="topage(pagedata.lastPage)" disabled mat-mini-fab  aria-label="Example icon button with a home icon">
+    <mat-icon>last_page</mat-icon>
+  </button>&nbsp;&nbsp;
+</div>
+</div>
+
+
+    <div style="margin-top: 15px;"  *ngFor="let item of pagedata.datas " >
+        <mat-card  style="margin-top: 5px;" class="mat-elevation-z2" (click) ="edit(item)" >
+          <mat-card-header>
+            <mat-icon mat-card-avatar >person</mat-icon>
+            <mat-card-title>{{ item.nom}}</mat-card-title>
+            <mat-card-subtitle>{{ item.prenom}} </mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+    </div>     
+   
+
+
+</div>
+
+
+
+</div>

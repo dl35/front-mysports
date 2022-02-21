@@ -26,12 +26,15 @@
           </div>
           </div>
           
-          <div  style="margin-top:15px" >
-          <div>
+          <div  style="margin-top:15px; display: inline-block;" >
+         
+          <button mat-raised-button color="primary"  routerLink="/guest"    >
+          <mat-icon>play_arrow</mat-icon>
+          Guest</button>
+          &nbsp;&nbsp;&nbsp;
           <button mat-raised-button color="primary"  type="submit"  [disabled]="dataForm.invalid"    >
-              <mat-icon>play_arrow</mat-icon>
-              Login</button>
-            </div>
+          <mat-icon>play_arrow</mat-icon>
+          Login</button>
        
           </div>
 

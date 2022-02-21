@@ -1,0 +1,28 @@
+
+
+    <mat-form-field style="margin-top:25px;font-size: 12px;margin-left:2%;width:60%;"  >
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput type="text"     placeholder="rechercher..." class="search-input">
+    </mat-form-field>
+    
+    <div *ngIf="datas$ | async as datas " >
+    
+      
+    
+        <div style="margin-top: 15px;"  *ngFor="let item of datas " >
+            <mat-card  style="margin-top: 5px;" class="mat-elevation-z2"  >
+              <mat-card-header>
+                <mat-icon mat-card-avatar >home</mat-icon>
+                <mat-card-title>{{ item.prenom}} {{ item.nom}}</mat-card-title>
+                <mat-card-subtitle>{{ item.type}} : {{ item.dist}} </mat-card-subtitle>
+              </mat-card-header>
+            </mat-card>
+        </div>     
+       
+    
+    
+    </div>
+    
+    
+    
+ 

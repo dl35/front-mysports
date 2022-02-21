@@ -30,6 +30,8 @@ import {
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 import 'moment/locale/fr';
+import { TuserComponent } from './tuser/tuser.component';
+import { GuestComponent } from './guest/guest.component';
 // import { registerLocaleData } from '@angular/common';
 // registerLocaleData(localeFr);
 
@@ -58,7 +60,9 @@ export const MY_FORMATS = {
     ProfileComponent,
     ChartComponent,
     DialogConfirmComponent,
-    KmsPipe
+    KmsPipe,
+    TuserComponent,
+    GuestComponent
     
   ],
   imports: [

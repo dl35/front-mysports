@@ -8,12 +8,12 @@
      <br> 
     <div style="margin-top:15px" >
         <div style="width:100%" > 
-          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-icon color="primary" >sports</mat-icon>
           <mat-form-field  style="width:40%"  >
             <mat-select placeholder="Type"  formControlName="type" >
-              <mat-option value="BIKE" sele>Cyclisme</mat-option>
-              <mat-option value="SWIM">Natation</mat-option>
-              <mat-option value="RUN">Course à pied</mat-option>
+              <mat-option value="BIKE" >Cyclisme</mat-option>
+              <mat-option value="SWIM" >Natation</mat-option>
+              <mat-option value="RUN"  >Course à pied</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -21,7 +21,7 @@
 
     <div style="margin-top:15px" >
         <div style="width:100%" > 
-          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-icon color="primary" >calendar_today</mat-icon>
           <mat-form-field appearance="fill" style="width:40%" >
             <mat-label>La date</mat-label>
             <input matInput [max]="maxDate"   [matDatepicker]="picker" formControlName="date" >
@@ -35,7 +35,7 @@
 
     <div style="margin-top:15px" >
         <div style="width:100%" > 
-          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-icon color="primary" >trending_up</mat-icon>
           <mat-form-field  style="width:40%"  >
             <input matInput placeholder="Distance en {{ distSuffix }}" type="number" formControlName="dist"   >
             <span matSuffix >{{distSuffix}}</span>
@@ -49,7 +49,7 @@
 
     <div style="margin-top:15px" >
         <div style="width:100%" > 
-          <mat-icon color="primary" >perm_identity</mat-icon>
+          <mat-icon color="primary" >insert_comment</mat-icon>
           <mat-form-field  style="width:40%"  >
             <input matInput placeholder="Description"  formControlName="desc"  >
             <mat-hint>Description optionnelle</mat-hint>

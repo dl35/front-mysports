@@ -18,6 +18,12 @@ export class UsersService {
   constructor(private http: HttpClient) {
   }
 
+  getGuest(): Observable<any> {
+     const u = "/guest";
+     return this.http.get<any>( u ) ;
+  }
+
+
   getProfile(): Observable<User> {
     const u = this.url +"/profile";
      return this.http.get<User>( u ) ;
@@ -42,6 +48,16 @@ export class UsersService {
     }
     return this.http.get<UserPage>( u ) ;
   }
+
+  getAll_v2(page:number, search: string ): Observable<UserPage> {
+    let u = this.url +"?page="+page;
+    if( search ) {
+        u +="&search="+search; 
+    }
+    return this.http.get<UserPage>( u ) ;
+  }
+
+
 
   put(id: number, user: User): Observable<any> {
     const u = this.url+"/"+id ;

@@ -4,21 +4,24 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
     
-      <button (click)="change(1)" mat-raised-button [color]="this.selected == 1 ? 'accent' : 'primary'"  matTooltip="Activites" routerLink="/activite" >
+      <button  mat-raised-button color="primary" routerLinkActive="mat-accent"  matTooltip="Activites" routerLink="/activite" >
       <mat-icon>build</mat-icon>Activites</button>
       &nbsp;&nbsp;
-      <button (click)="change(2)" *ngIf="profile =='ADMIN'" mat-raised-button [color]="this.selected == 2 ? 'accent' : 'primary'"  matTooltip="Utilistaeurs" routerLink="/user" >
+      <button  *ngIf="profile =='ADMIN'" mat-raised-button color="primary" routerLinkActive="mat-accent"   matTooltip="Utilistaeurs" routerLink="/user" >
       <mat-icon>speaker_phone</mat-icon>Users</button>
       &nbsp;&nbsp;
-      <button (click)="change(3)" mat-raised-button [color]="this.selected == 3 ? 'accent' : 'primary'"  matTooltip="Graphique" routerLink="/graphique" >
+      <button  *ngIf="profile =='ADMIN'" mat-raised-button color="primary" routerLinkActive="mat-accent"  matTooltip="Utilistaeurs" routerLink="/tuser" >
+        <mat-icon>speaker_phone</mat-icon>TUser</button>
+        &nbsp;&nbsp;
+      <button  mat-raised-button color="primary" routerLinkActive="mat-accent" matTooltip="Graphique" routerLink="/graphique" >
       <mat-icon>pie_chart</mat-icon>Graphique</button>
 
         <span class="fill-space"></span>
 
-        <button mat-raised-button aria-label="Profile" matTooltip="{{profile}}" *ngIf="profile =='ADMIN'"  (click)="change(3)" [color]="this.selected == 3 ? 'warn' : 'primary'" routerLink="/profile"  >
+        <button mat-raised-button aria-label="Profile" matTooltip="{{profile}}" *ngIf="profile =='ADMIN'"  color="primary" routerLinkActive="mat-accent" routerLink="/profile"  >
           <mat-icon>supervisor_account</mat-icon>
         </button>
-        <button mat-raised-button aria-label="Profile" matTooltip="{{profile}}" *ngIf="profile =='USER'" (click)="change(3)" [color]="this.selected == 3 ? 'accent' : 'primary'" routerLink="/profile"  >
+        <button mat-raised-button aria-label="Profile" matTooltip="{{profile}}" *ngIf="profile =='USER'" color="primary" routerLinkActive="mat-accent" routerLink="/profile"  >
           <mat-icon>account_circle</mat-icon>
           <mat-icon>exit_to_app</mat-icon>
         </button>

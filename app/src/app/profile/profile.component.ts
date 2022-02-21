@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs';
 import { ProfileDto } from './../interfaces/profile-dto';
 import { UsersService } from './../services/users.service';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit {
   initForm(user: User) {
     const df = this.formBuilder.group({
       // tslint:disable-next-line:max-line-length
+      id: [ '' ],
       nom: [ '', [Validators.required,  Validators.minLength(4)] ],
       prenom: [ '', [Validators.required,  Validators.minLength(4)] ],
       adresse: [ '', [Validators.required,  Validators.minLength(4)] ],
