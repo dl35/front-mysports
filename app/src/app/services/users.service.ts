@@ -18,12 +18,13 @@ export class UsersService {
   constructor(private http: HttpClient) {
   }
 
-  getGuest(): Observable<any> {
-     const u = "/guest";
+  getGuest(page: number, filter: string): Observable<any> {
+     const u = "/guest/"+page+ filter ;
+     console.log( u );
      return this.http.get<any>( u ) ;
   }
 
-
+ 
   getProfile(): Observable<User> {
     const u = this.url +"/profile";
      return this.http.get<User>( u ) ;

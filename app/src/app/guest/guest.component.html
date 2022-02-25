@@ -1,27 +1,50 @@
 
-
-    <mat-form-field style="margin-top:25px;font-size: 12px;margin-left:2%;width:60%;"  >
+<p>
+  <mat-toolbar  color="primary" >
+    <span>Activités</span>
+    <span style="flex: 1 1 auto;" ></span>
+    <mat-icon style="cursor: pointer;"  title="login"  aria-hidden="false" aria-label="Example heart icon" routerLink="login" >home</mat-icon>
+  </mat-toolbar>
+</p>
+    <mat-form-field style="margin-top:25px;font-size: 12px;margin-left:2%;width:45%;"  >
     <mat-icon matPrefix>search</mat-icon>
-    <input matInput type="text"     placeholder="rechercher..." class="search-input">
+    <input matInput type="text"  [formControl]="searchControl"   placeholder="rechercher..." class="search-input">
     </mat-form-field>
+   
+    &nbsp;<mat-checkbox [checked]="true" (change)="setType($event)" value="SWIM" >Natation</mat-checkbox>
+    &nbsp;<mat-checkbox [checked]="true" (change)="setType($event)" value="BIKE" >Cyclisme</mat-checkbox> 
+    &nbsp;<mat-checkbox [checked]="true" (change)="setType($event)" value="RUN" >Course à pied</mat-checkbox>
+ 
+    <div>Total: {{ total$ | async }} </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="loading$ | async" ></mat-progress-bar>  
+  
+      
+      <cdk-virtual-scroll-viewport   itemSize="55" class="product-scroll-viewport"  > 
+   
+
+      <mat-grid-list cols="3" rowHeight="4:1"  >
+        <mat-grid-tile   *cdkVirtualFor="let item of ds " >
     
-    <div *ngIf="datas$ | async as datas " >
+            <mat-card  style="margin-top:10px;width:75%"  class="mat-elevation-z2"  >
+              <mat-card-header>
+                <mat-icon mat-card-avatar color="primary" *ngIf="item.type == 'SWIM' " >pool</mat-icon>
+                <mat-icon mat-card-avatar color="accent" *ngIf="item.type == 'BIKE' "  >directions_bike</mat-icon>
+                <mat-icon mat-card-avatar color="warn" *ngIf="item.type == 'RUN' " >directions_run</mat-icon>
+                <mat-card-title>{{ item.prenom}} {{ item.nom}}</mat-card-title>
+                <mat-card-subtitle>{{ item.date | date:'mediumDate'}}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-footer> {{ getType( item.type ) }} : {{ item.dist | kmsPipe: item.type }}</mat-card-footer>
+            </mat-card>
+      
+       </mat-grid-tile>
     
       
+  
+   
+      </mat-grid-list>
+    </cdk-virtual-scroll-viewport>
     
-        <div style="margin-top: 15px;"  *ngFor="let item of datas " >
-            <mat-card  style="margin-top: 5px;" class="mat-elevation-z2"  >
-              <mat-card-header>
-                <mat-icon mat-card-avatar >home</mat-icon>
-                <mat-card-title>{{ item.prenom}} {{ item.nom}}</mat-card-title>
-                <mat-card-subtitle>{{ item.type}} : {{ item.dist}} </mat-card-subtitle>
-              </mat-card-header>
-            </mat-card>
-        </div>     
-       
-    
-    
-    </div>
+   
     
     
     

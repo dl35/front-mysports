@@ -1,0 +1,30 @@
+.spinner-item {
+    display: grid;
+    place-items: center;
+    margin-top: 10px;
+}
+
+
+.product-scroll-viewport {
+    height: 750px;
+    _width: 70%;
+    margin:0 auto;
+    margin-top:10px;
+  }
+
+
+  .product-item {
+    height: 55px;
+    _width: 60%;
+    display: flex;
+    margin-top:15px;
+    margin-left:15px;
+    margin-right:15px;
+  }
+
+
+  cdk-virtual-scroll-viewport {
+    border: none;
+  }
+
+ 
